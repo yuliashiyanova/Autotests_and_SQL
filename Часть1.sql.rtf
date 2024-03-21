@@ -5,7 +5,10 @@
 \margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f0\fs22 \cf2 \CocoaLigature0 scooter_rent=# SELECT "Couriers".login, COUNT(*) AS orders_in_delivery\
+\f0\fs22 \cf2 \CocoaLigature0 1 \uc0\u1095 \u1072 \u1089 \u1090 \u1100 \
+\
+\
+scooter_rent=# SELECT "Couriers".login, COUNT(*) AS orders_in_delivery\
 scooter_rent-# FROM "Orders"\
 scooter_rent-# JOIN "Couriers" ON "Couriers".id = "courierId"\
 scooter_rent-# WHERE "inDelivery" = true\
@@ -13,4 +16,21 @@ scooter_rent-# GROUP BY "Couriers".login;\
  login | orders_in_delivery \
 -------+--------------------\
 (0 rows)\
+\
+2 \uc0\u1095 \u1072 \u1089 \u1090 \u1100 \
+\
+scooter_rent=# SELECT track,\
+scooter_rent-#        CASE\
+scooter_rent-#            WHEN "finished" = true THEN 2\
+scooter_rent-#            WHEN "cancelled" = true THEN -1\
+scooter_rent-#            WHEN "inDelivery" = true THEN 1\
+scooter_rent-#            ELSE 0\
+scooter_rent-#        END AS status\
+scooter_rent-# FROM "Orders";\
+ track | status \
+-------+--------\
+(0 rows)\
+\
+scooter_rent=# \
+\
 }
